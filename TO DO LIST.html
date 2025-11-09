@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Simple To-Do List</title>
+  <link rel="stylesheet" href="to do list style.css">
+    
+   </head>
+<body>
+  <section class="todo">
+    <h2>To-Do List</h2>
+    <input type="text" id="task-input" placeholder="Add new task">
+    <button onclick="addTask()">Add</button>
+    <ul id="task-list"></ul>
+  </div>
+
+  <script>
+    function addTask() {
+      const input = document.getElementById('task-input');
+      const taskText = input.value.trim();
+      if (taskText === "") return;
+
+      const li = document.createElement('li');
+      li.textContent = taskText;
+
+      li.addEventListener('click', function() {
+        li.classList.toggle('done');
+      });
+
+
+      const delBtn = document.createElement('span');
+      delBtn.textContent = 'Delete';
+      delBtn.className = 'delete-btn';
+      delBtn.addEventListener('click', function(e) {
+        e.stopPropagation(); 
+        li.remove();
+      });
+
+      li.appendChild(delBtn);
+      document.getElementById('task-list').appendChild(li);
+      input.value = '';
+    }
+
+    document.getElementById('task-input').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') addTask();
+    });
+  </script>
+</body>
+</html>
